@@ -9,21 +9,10 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_community.chat_models import ChatOllama
 from langchain_core.runnables import RunnablePassthrough
 from langchain.retrievers.multi_query import MultiQueryRetriever
-import streamlit as st
-import os
-import time
-current_dir = os.getcwd()
-save_file_name = None  # Initialize the global variable
 
-st.title("PDF Reader")
-st.write("Upload a PDF file to read its content.")
-uploaded_file = st.file_uploader("Choose a file to upload", type=['txt', 'pdf', 'docx'])
-
-file_path = uploaded_file
+file_path = r"C:\Users\Joel\Dropbox\My PC (LAPTOP-RQL6K54S)\Downloads\2.pdf"
 loader = PyPDFLoader(file_path)
 data = loader.load()
-st.success(f"Successfully uploaded")
-
 
 # Split and chunk 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=7500, chunk_overlap=100)
@@ -35,6 +24,8 @@ vector_db = Chroma.from_documents(
     embedding=OllamaEmbeddings(model="nomic-embed-text",show_progress=True),
     collection_name="local-rag"
 )
+
+
 
 
 # LLM from Ollama
@@ -74,27 +65,4 @@ chain = (
     | StrOutputParser()
 )
 
-
-st.title("Ask your questions here!")
-
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-# Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-
-if prompt := st.chat_input("Message Chatbot..."):
-    # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    # Display user message in chat message container
-    with st.chat_message("user"):
-        st.markdown(prompt)
-
-    # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-        response = st.write_stream(chain.invoke(prompt))
-    # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
+chain.invoke(input(""))
