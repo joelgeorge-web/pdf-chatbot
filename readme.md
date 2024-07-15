@@ -12,7 +12,8 @@ Welcome to Pdf Chatbot, a Python project that allows you to interact with PDF fi
 
 1. Clone the repository: `git clone https://github.com/your-username/pdf-chatbot.git`
 2. Navigate to the project directory: `cd PDF CHATBOT`
-3. Install the required dependencies: `pip install -r requirements.txt`
+3. Run the command 'ollama pull llama3'
+4. Install the required dependencies: `pip install -r requirements.txt`
 
 ## Usage
 
