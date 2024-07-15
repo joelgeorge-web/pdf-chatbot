@@ -1,6 +1,7 @@
 # Pdf Chatbot
 
 Welcome to Pdf Chatbot, a Python project that allows you to interact with PDF files using a chatbot interface.
+![Screenshot 2024-07-14 130454](https://github.com/user-attachments/assets/df94eb15-0ce0-4131-ad3b-4f98d3ebf048)
 
 ## Features
 
